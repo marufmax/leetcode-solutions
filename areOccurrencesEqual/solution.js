@@ -22,3 +22,27 @@ function areOccurrencesEqual(string) {
 
     return new Set(Object.values(occurrences)).size === 1;
 }
+
+/**
+ * This is I grab from discussion, seems faster. 
+ * Its basically compare with max occurance
+ * 
+ * @param {*} string 
+ * @returns 
+ */
+function areOccurrencesEqual(string) {
+    let charMap = {};
+
+    let max = 0;
+    for (const char of string) {
+
+        if(!charMap[char]) charMap[char] = 0;
+        charMap[char]++;
+        max = Math.max(max, charMap[char]);
+    }
+
+    return !Object.values(charMap).some(elm => elm !== max);
+}
+
+console.log(areOccurrencesEqual('abacbc'));
+console.log(areOccurrencesEqual('aaabb'));
