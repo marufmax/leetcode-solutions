@@ -15,7 +15,7 @@ function areOccurrencesEqual(string) {
         charMap[character] = charMap[character] + 1 || 1;
     }
 
-    return new Set(Object.values(occurrences)).size === 1;
+    return new Set(Object.values(charMap)).size === 1;
 }
 
 /**
