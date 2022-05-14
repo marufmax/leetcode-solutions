@@ -9,15 +9,10 @@
  * @return {boolean}
  */
 function areOccurrencesEqual(string) {
-    let occurrences = {};
+    let charMap = {};
 
     for (const character of string) {
-
-        if(occurrences[character] !== undefined) {
-            occurrences[character] += 1;
-        } else {
-            occurrences[character] = 1;
-        }
+        charMap[character] = charMap[character] + 1 || 1;
     }
 
     return new Set(Object.values(occurrences)).size === 1;
@@ -42,6 +37,27 @@ function areOccurrencesEqual(string) {
     }
 
     return !Object.values(charMap).some(elm => elm !== max);
+}
+
+/**
+ * without help of any built in functions 
+ * Double loop, kinda slower than others
+ * 
+ * @param {*} string 
+ * @returns 
+ */
+ function areOccurrencesEqual(string) {
+    let charMap = {};
+
+    for (let i = 0; i < string.length; i++){
+        charMap[string[i]] = charMap[string[i]] + 1 || 1; 
+    } 
+
+    for (const key in charMap) {
+        if(charMap[key] !== charMap[string[0]]) return false;
+    }
+
+    return true;
 }
 
 console.log(areOccurrencesEqual('abacbc'));
